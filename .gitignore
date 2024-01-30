@@ -1,0 +1,9 @@
+/env
+*.env
+
+b_env
+
+/migrations
+migrations/
+
+__pycache__/
