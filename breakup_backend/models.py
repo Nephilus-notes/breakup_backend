@@ -11,6 +11,7 @@ class User(AbstractUser):
     streak_starts =models.JSONField(default=list) # list of dictionaries.  Keys are strings of dates, values are integers of streaks
     support_info = models.JSONField(default=dict) # dictionary of support info
     struggles_info = models.JSONField(default=dict) # dictionary of struggles info, with a list of breakup Dates
+    tutorial_in_progres = models.BooleanField(default=False)
 # Create your models here.
 
 class MoodTrackerEntry(models.Model):
