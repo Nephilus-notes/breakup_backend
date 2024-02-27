@@ -15,6 +15,9 @@ from pathlib import Path
 
 env = environ.Env()
 environ.Env.read_env()
+
+mimetypes.add_type("text/html", ".html", True)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wih=oa_q^(2j6mj6p5m6j!6s%a^6hhe@*kx5z!p0e@@hoqu7_t'
+SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django-rest-framework',
+    'rest_framework_swagger',
     'rest_framework',
+    'corsheaders',
     'breakup_backend'
 ]
 
@@ -131,3 +136,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
+# CORS_ALLOWED_ORIGINS = [
+# "https://domain.com",
+# "https://api.domain.com",
+# "http://localhost:8080",
+# "http://127.0.0.1:9000"
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
