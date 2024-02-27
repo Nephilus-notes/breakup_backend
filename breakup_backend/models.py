@@ -1,7 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-
-class User(models.Model):
+class User(AbstractUser):
     id = models.AutoField(primary_key=True)
     auth_id = models.CharField(max_length=100)
     name = models.CharField(max_length=100) # not necessarily actual name
@@ -9,6 +9,8 @@ class User(models.Model):
     password = models.CharField(max_length=100)
     streak_max = models.IntegerField(default=0)
     streak_starts =models.JSONField(default=list) # list of dictionaries.  Keys are strings of dates, values are integers of streaks
+    support_info = models.JSONField(default=dict) # dictionary of support info
+    struggles_info = models.JSONField(default=dict) # dictionary of struggles info, with a list of breakup Dates
 # Create your models here.
 
 class MoodTrackerEntry(models.Model):
