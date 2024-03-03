@@ -19,9 +19,15 @@ from django.urls import path
 
 from rest_framework import routers
 from breakup_backend import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('create_profile', views.create_profile, name='create_profile'),
     path('mood_tracker_entry/<int:pk>', views.mood_tracker_entry, name='mood_tracker_entry'),
     path('mood_tracker_entry', views.mood_tracker_entry, name='mood_tracker_entry')
