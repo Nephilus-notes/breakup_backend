@@ -29,6 +29,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('create_profile', views.create_profile, name='create_profile'),
+    path('get_user_profile/<str:email>/<str:password>', views.get_user_profile, name='get_user_profile'),
     path('mood_tracker_entry/<int:pk>', views.mood_tracker_entry, name='mood_tracker_entry'),
     path('mood_tracker_entry', views.mood_tracker_entry, name='mood_tracker_entry')
 ]

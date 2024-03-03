@@ -18,9 +18,10 @@ class MoodTrackerEntrySerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=True)
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     date = serializers.DateField()
+    content = serializers.CharField()
     mood_status = serializers.IntegerField()
     days_on_streak = serializers.IntegerField()
-    last_reset = serializers.CharField()
+    last_reset = serializers.DateTimeField()
 
     def create(self, validated_data):
         return MoodTrackerEntry.objects.create(**validated_data)
@@ -44,7 +45,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=True)
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     date = serializers.DateField()
-    content = serializers.TextField()
+    content = serializers.CharField()
     likes = serializers.IntegerField()
     comments = serializers.JSONField()
     tags = serializers.JSONField()
@@ -73,7 +74,7 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     post_id = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
     date = serializers.DateField()
-    content = serializers.TextField()
+    content = serializers.CharField()
     likes = serializers.IntegerField()
     tags = serializers.JSONField()
 

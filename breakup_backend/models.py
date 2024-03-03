@@ -20,14 +20,14 @@ class MoodTrackerEntry(models.Model):
     date = models.DateField()
     mood_status = models.IntegerField(default=0)
     days_on_streak = models.IntegerField(default=0)
-    last_reset = models.CharField()
+    last_reset = models.DateTimeField()
 
 class JournalEntry(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = models.CharField(max_length=5000)
     tags = models.JSONField(default=list) # list of tags
     days_on_streak = models.IntegerField(default=0)
 
@@ -35,7 +35,7 @@ class Post(models.Model):
     id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
-    content = models.TextField()
+    content = models.CharField(max_length=2000)
     likes = models.IntegerField(default=0)
     comments = models.JSONField(default=dict) # dictionary of comments, with keys as the comment ids and values as the comment content
     tags = models.JSONField(default=list) # list of tags
@@ -45,6 +45,6 @@ class Comment(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     date = models.DateField()
-    content = models.TextField()
+    content = models.CharField(max_length=2000)
     likes = models.IntegerField(default=0)
     tags = models.JSONField(default=list) # list of tags

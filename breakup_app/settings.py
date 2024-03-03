@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django-rest-framework',
+    # 'django-rest-framework',
     'rest_framework_swagger',
     'rest_framework',
-    'corsheaders',
+    # 'corsheaders',
     'breakup_backend'
 ]
 
@@ -147,6 +147,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+AUTH_USER_MODEL = "breakup_backend.User"
 
 # CORS_ALLOWED_ORIGINS = [
 # "https://domain.com",
