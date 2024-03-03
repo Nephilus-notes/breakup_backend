@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
-
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .serializers import MoodTrackerEntrySerializer, UserSerializer, PostSerializer, CommentSerializer
@@ -16,6 +16,15 @@ def create_profile(request):
         # double check that there are no other users with the same email, auth_id, pk, etc.
         serializer.save()
     return Response()
+
+@api_view(['GET'])
+def get_user_profile(request, email, password):
+    try:
+        user = User.objects.get(email=email, password=password)
+    except User.DoesNotExist:
+        return Response(status=404)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
 
 @api_view(['GET', 'POST', 'DELETE'])
 def mood_tracker_entry(request, pk):
@@ -87,5 +96,4 @@ def comment(request, pk):
 # def authenticate(request):
 #     # check if the user is authenticated
 #     return Response()
-    
     
